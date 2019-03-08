@@ -1,0 +1,35 @@
+{
+  "name": "wdmg/yii2-forms",
+  "description": "Creation and management of user forms",
+  "keywords": ["yii2", "yii2-forms", "forms", "form management", "wdmg"],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "version": "1.0.0",
+  "homepage": "https://github.com/wdmg/yii2-forms",
+  "support": {
+    "source": "https://github.com/wdmg/yii2-forms",
+    "issues": "https://github.com/wdmg/yii2-forms/issues"
+  },
+  "authors": [
+    {
+      "name": "Alexsander Vyshnyvetskyy",
+      "email": "alex.vyshnyvetskyy@gmail.com"
+    },
+    {
+      "name": "W.D.M.Group, Ukraine",
+      "email": "wdmg.com.ua@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "^2.0.13"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "wdmg\\forms\\": ""
+    }
+  },
+  "extra": {
+    "bootstrap": "wdmg\\forms\\Bootstrap"
+  }
+}
