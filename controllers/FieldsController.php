@@ -3,8 +3,8 @@
 namespace wdmg\forms\controllers;
 
 use Yii;
-use app\vendor\wdmg\forms\models\Fields;
-use app\vendor\wdmg\forms\models\FieldsSearch;
+use wdmg\forms\models\Fields;
+use wdmg\forms\models\FieldsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -4,7 +4,7 @@ namespace wdmg\forms\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\vendor\wdmg\forms\models\Submits;
+use wdmg\forms\models\Submits;
 
 /**
  * SubmitsSearch represents the model behind the search form of `app\vendor\wdmg\forms\models\Submits`.

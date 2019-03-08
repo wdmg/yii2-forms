@@ -3,16 +3,16 @@
 namespace wdmg\forms\controllers;
 
 use Yii;
-use app\vendor\wdmg\forms\models\Forms;
-use app\vendor\wdmg\forms\models\FormsSearch;
+use wdmg\forms\models\Forms;
+use wdmg\forms\models\FormsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * FormsController implements the CRUD actions for Forms model.
+ * ListController implements the CRUD actions for Forms model.
  */
-class FormsController extends Controller
+class ListController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -33,7 +33,7 @@ class FormsController extends Controller
      * Lists all Forms models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionAll()
     {
         $searchModel = new FormsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
