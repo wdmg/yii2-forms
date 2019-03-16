@@ -46,8 +46,20 @@ $config['bootstrap'][] = 'wdmg\forms\Bootstrap';
 `
 
 # Routing
-- `/admin/forms/list/` - Forms list
+Use the `Module::dashboardNavItems()` method of the module to generate a navigation items list for NavBar, like this:
+
+    <?php
+        echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+            'label' => 'Modules',
+            'items' => [
+                Yii::$app->getModule('forms')->dashboardNavItems(),
+                ...
+            ]
+        ]);
+    ?>
 
 
 # Status and version [in progress development]
+* v.1.0.1 - Added dashboard navigation items for NavBar
 * v.1.0.0 - Initial
