@@ -10,16 +10,13 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app/modules/forms', 'Fields');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="page-header">
+    <h1>
+        <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
+    </h1>
+</div>
 <div class="fields-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('app/modules/forms', 'Create Fields'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -38,5 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <hr/>
+    <div>
+        <?= Html::a(Yii::t('app/modules/forms', 'Create Fields'), ['create'], ['class' => 'btn btn-success']) ?>
+    </div>
     <?php Pjax::end(); ?>
 </div>
+
+<?php echo $this->render('../_debug'); ?>

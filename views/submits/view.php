@@ -7,25 +7,17 @@ use yii\widgets\DetailView;
 /* @var $model app\vendor\wdmg\forms\models\Submits */
 
 $this->title = $model->id;
+$this->params['breadcrumbs'][] = $this->context->module->name, 'url' => ['forms/list']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/forms', 'Submits'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<div class="page-header">
+    <h1>
+        <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
+    </h1>
+</div>
 <div class="submits-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app/modules/forms', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app/modules/forms', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app/modules/forms', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -37,6 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             'status',
         ],
-    ]) ?>
-
+    ]); ?>
+    <hr/>
+    <div>
+        <?= Html::a(Yii::t('app/modules/forms', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
+        <?= Html::a(Yii::t('app/modules/forms', 'Delete'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => Yii::t('app/modules/forms', 'Are you sure you want to delete this item?'),
+                'method' => 'post',
+            ],
+        ]); ?>
+    </div>
 </div>
+
+<?php echo $this->render('../_debug'); ?>

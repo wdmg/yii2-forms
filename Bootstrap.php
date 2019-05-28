@@ -20,14 +20,32 @@ class Bootstrap implements BootstrapInterface
         $module = Yii::$app->getModule('forms');
 
         // Get URL path prefix if exist
-        $prefix = (isset($module->routePrefix) ? $module->routePrefix . '/' : '');
+        if (isset($module->routePrefix)) {
+            $app->getUrlManager()->enableStrictParsing = true;
+            $prefix = $module->routePrefix . '/';
+        } else {
+            $prefix = '';
+        }
 
         // Add module URL rules
         $app->getUrlManager()->addRules(
             [
-                $prefix . '<module:forms>/' => '<module>/list/all',
-                $prefix . '<module:forms>/<controller:(list)>/' => '<module>/<controller>',
-                $prefix . '<module:forms>/<controller:(item)>/<action:(view|update|delete|set)>' => '<module>/<controller>/<action>',
+                $prefix . '<module:forms>/' => '<module>/list/index',
+                $prefix . '<module:forms>/<controller:\w+>/' => '<module>/<controller>',
+                $prefix . '<module:forms>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
+                [
+                    'pattern' => $prefix . '<module:forms>/',
+                    'route' => '<module>/list/index',
+                    'suffix' => '',
+                ], [
+                'pattern' => $prefix . '<module:forms>/<controller:\w+>/',
+                'route' => '<module>/<controller>',
+                'suffix' => '',
+            ], [
+                'pattern' => $prefix . '<module:forms>/<controller:\w+>/<action:\w+>',
+                'route' => '<module>/<controller>/<action>',
+                'suffix' => '',
+            ],
             ],
             true
         );

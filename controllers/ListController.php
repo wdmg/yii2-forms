@@ -33,7 +33,7 @@ class ListController extends Controller
      * Lists all Forms models.
      * @return mixed
      */
-    public function actionAll()
+    public function actionIndex()
     {
         $searchModel = new FormsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
