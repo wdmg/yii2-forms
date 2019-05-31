@@ -5,7 +5,7 @@ Creation and management of user forms
 
 # Requirements 
 * PHP 5.6 or higher
-* Yii2 v.2.0.13 and newest
+* Yii2 v.2.0.19 and newest
 * [Yii2 Users](https://github.com/wdmg/yii2-users) module (optionaly)
 
 # Installation
@@ -32,7 +32,7 @@ To add a module to the project, add the following data in your configuration fil
 
     'modules' => [
         ...
-        'tickets' => [
+        'forms' => [
             'class' => 'wdmg\forms\Module',
             'routePrefix' => 'admin'
         ],
@@ -61,6 +61,5 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 
 
 # Status and version [in progress development]
+* v.1.0.3 - Update Yii2 version
 * v.1.0.2 - Added views, module name and description, translations. Routing fix.
-* v.1.0.1 - Added dashboard navigation items for NavBar
-* v.1.0.0 - Initial
