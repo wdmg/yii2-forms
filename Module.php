@@ -6,7 +6,7 @@ namespace wdmg\forms;
  * Yii2 Forms
  *
  * @category        Module
- * @version         1.0.3
+ * @version         1.0.4
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -29,7 +29,7 @@ class Module extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public $defaultRoute = "forms";
+    public $defaultRoute = "forms/index";
 
     /**
      * @var string the prefix for routing of module
@@ -54,7 +54,7 @@ class Module extends \yii\base\Module
     /**
      * @var string the module version
      */
-    private $version = "1.0.3";
+    private $version = "1.0.4";
 
     /**
      * @var integer, priority of initialization

@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.4 (2019-06-01)
+ * Bugfix, routing and refactoring
+
 ## 1.0.3 (2019-05-31)
  * Update Yii2 version
  
