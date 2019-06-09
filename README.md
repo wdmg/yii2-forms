@@ -55,5 +55,6 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 
 
 # Status and version [in progress development]
+* v.1.0.7 - Added choice param for non interactive mode
 * v.1.0.6 - Module refactoring
 * v.1.0.5 - Module transferred to base module interface. Update Yii2 version.
