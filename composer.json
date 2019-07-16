@@ -4,7 +4,7 @@
   "keywords": ["yii2", "yii2-forms", "forms", "form management", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "homepage": "https://github.com/wdmg/yii2-forms",
   "support": {
     "source": "https://github.com/wdmg/yii2-forms",
@@ -28,6 +28,11 @@
   "autoload": {
     "psr-4": {
       "wdmg\\forms\\": ""
+    }
+  },
+  "extra": {
+    "options": {
+      "routePrefix": "admin"
     }
   }
 }
