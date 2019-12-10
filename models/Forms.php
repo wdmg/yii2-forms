@@ -67,7 +67,7 @@ class Forms extends \yii\db\ActiveRecord
      */
     public function getFormsFields()
     {
-        return $this->hasMany(FormsFields::className(), ['form_id' => 'id']);
+        return $this->hasMany(FormsFields::class, ['form_id' => 'id']);
     }
 
     /**
@@ -75,6 +75,6 @@ class Forms extends \yii\db\ActiveRecord
      */
     public function getFormsSubmits()
     {
-        return $this->hasMany(FormsSubmits::className(), ['form_id' => 'id']);
+        return $this->hasMany(FormsSubmits::class, ['form_id' => 'id']);
     }
 }

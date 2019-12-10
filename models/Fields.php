@@ -40,7 +40,7 @@ class Fields extends \yii\db\ActiveRecord
             [['params'], 'string'],
             [['label'], 'string', 'max' => 64],
             [['description'], 'string', 'max' => 255],
-            //[['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => FormsList::className(), 'targetAttribute' => ['form_id' => 'id']],
+            //[['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => FormsList::class, 'targetAttribute' => ['form_id' => 'id']],
         ];
     }
 
@@ -66,7 +66,7 @@ class Fields extends \yii\db\ActiveRecord
      */
     public function getFormsContents()
     {
-        return $this->hasMany(FormsContent::className(), ['input_id' => 'id']);
+        return $this->hasMany(FormsContent::class, ['input_id' => 'id']);
     }
 
     /**
@@ -74,6 +74,6 @@ class Fields extends \yii\db\ActiveRecord
      */
     public function getForm()
     {
-        return $this->hasOne(FormsList::className(), ['id' => 'form_id']);
+        return $this->hasOne(FormsList::class, ['id' => 'form_id']);
     }
 }

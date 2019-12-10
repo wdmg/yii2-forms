@@ -34,8 +34,8 @@ class Content extends \yii\db\ActiveRecord
             [['submit_id', 'input_id'], 'required'],
             [['submit_id', 'input_id'], 'integer'],
             [['value'], 'string'],
-            [['input_id'], 'exist', 'skipOnError' => true, 'targetClass' => FormsFields::className(), 'targetAttribute' => ['input_id' => 'id']],
-            [['submit_id'], 'exist', 'skipOnError' => true, 'targetClass' => FormsSubmits::className(), 'targetAttribute' => ['submit_id' => 'id']],
+            [['input_id'], 'exist', 'skipOnError' => true, 'targetClass' => FormsFields::class, 'targetAttribute' => ['input_id' => 'id']],
+            [['submit_id'], 'exist', 'skipOnError' => true, 'targetClass' => FormsSubmits::class, 'targetAttribute' => ['submit_id' => 'id']],
         ];
     }
 
@@ -57,7 +57,7 @@ class Content extends \yii\db\ActiveRecord
      */
     public function getInput()
     {
-        return $this->hasOne(FormsFields::className(), ['id' => 'input_id']);
+        return $this->hasOne(FormsFields::class, ['id' => 'input_id']);
     }
 
     /**
@@ -65,6 +65,6 @@ class Content extends \yii\db\ActiveRecord
      */
     public function getSubmit()
     {
-        return $this->hasOne(FormsSubmits::className(), ['id' => 'submit_id']);
+        return $this->hasOne(FormsSubmits::class, ['id' => 'submit_id']);
     }
 }
