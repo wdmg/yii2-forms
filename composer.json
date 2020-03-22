@@ -4,7 +4,7 @@
   "keywords": ["yii2", "yii2-forms", "forms", "form management", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "homepage": "https://github.com/wdmg/yii2-forms",
   "support": {
     "source": "https://github.com/wdmg/yii2-forms",
@@ -22,7 +22,9 @@
   ],
   "require": {
     "yiisoft/yii2": "^2.0.20",
-    "wdmg/yii2-base": "^1.0.1"
+    "wdmg/yii2-base": "^1.0.1",
+    "wdmg/yii2-helpers": "^1.3.1",
+    "wdmg/yii2-selectinput": "^1.0.7"
   },
   "minimum-stability": "dev",
   "autoload": {

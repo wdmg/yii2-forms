@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.0.10 (2020-03-22)
+ * Rebuild migrations, views
+ * Added translations
+ 
 ## 1.0.9 (2019-12-10)
  * Fixed deprecated class declaration
 

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\vendor\wdmg\forms\models\Forms */
 
-$this->title = Yii::t('app/modules/forms', 'Create Forms');
+$this->title = Yii::t('app/modules/forms', 'Create form');
 $this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

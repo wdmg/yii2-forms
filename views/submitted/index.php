@@ -7,8 +7,10 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\vendor\wdmg\forms\models\SubmitsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app/modules/forms', 'Submits');
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('app/modules/forms', 'All results');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/forms', 'Forms'), 'url' => ['list/index']];
+$this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Filling results');
+
 ?>
 <div class="page-header">
     <h1>
@@ -23,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'form_id',
             'user_id',
             'access_token',
@@ -34,10 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <hr/>
-    <div>
-        <?= Html::a(Yii::t('app/modules/forms', 'Create Submits'), ['create'], ['class' => 'btn btn-success']) ?>
-    </div>
     <?php Pjax::end(); ?>
 </div>
 

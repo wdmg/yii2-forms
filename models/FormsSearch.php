@@ -17,8 +17,8 @@ class FormsSearch extends Forms
     public function rules()
     {
         return [
-            [['id', 'available'], 'integer'],
-            [['name', 'slug', 'title', 'description', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['name', 'alias', 'title', 'description', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -59,15 +59,17 @@ class FormsSearch extends Forms
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'available' => $this->available,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'alias', $this->alias])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description]);
+
+        if ($this->status !== "*")
+            $query->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

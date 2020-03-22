@@ -6,7 +6,7 @@ namespace wdmg\forms;
  * Yii2 Forms
  *
  * @category        Module
- * @version         1.0.9
+ * @version         1.0.10
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
@@ -45,7 +45,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.0.9";
+    private $version = "1.0.10";
 
     /**
      * @var integer, priority of initialization
@@ -76,7 +76,24 @@ class Module extends BaseModule
             'label' => $this->name,
             'url' => [$this->routePrefix . '/'. $this->id],
             'icon' => 'fa fa-fw fa-paper-plane',
-            'active' => in_array(\Yii::$app->controller->module->id, [$this->id])
+            'active' => in_array(\Yii::$app->controller->module->id, [$this->id]),
+            'items' => [
+                [
+                    'label' => Yii::t('app/modules/forms', 'Forms list'),
+                    'url' => [$this->routePrefix . '/forms/list/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['forms']) &&  Yii::$app->controller->id == 'list'),
+                ],
+                [
+                    'label' => Yii::t('app/modules/forms', 'Fields list'),
+                    'url' => [$this->routePrefix . '/forms/fields/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['forms']) &&  Yii::$app->controller->id == 'fields'),
+                ],
+                [
+                    'label' => Yii::t('app/modules/forms', 'Filling results'),
+                    'url' => [$this->routePrefix . '/forms/submitted/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['forms']) &&  Yii::$app->controller->id == 'submitted'),
+                ]
+            ]
         ];
         return $items;
     }

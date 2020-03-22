@@ -1,5 +1,7 @@
 <?php
 
+use wdmg\widgets\Editor;
+use wdmg\widgets\SelectInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -14,22 +16,26 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->widget(Editor::class, [
+        'options' => [],
+        'pluginOptions' => []
+    ]) ?>
 
-    <?= $form->field($model, 'available')->textInput() ?>
+    <?= $form->field($model, 'status')->widget(SelectInput::class, [
+        'items' => $model->getStatusesList(false),
+        'options' => [
+            'class' => 'form-control'
+        ]
+    ]); ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
+    <hr/>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app/modules/forms', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app/modules/forms', '&larr; Back to list'), ['list/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
+        <?= Html::submitButton(Yii::t('app/modules/forms', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>

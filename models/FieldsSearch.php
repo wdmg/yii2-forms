@@ -17,8 +17,8 @@ class FieldsSearch extends Fields
     public function rules()
     {
         return [
-            [['id', 'form_id', 'type', 'sort_order', 'is_required'], 'integer'],
-            [['label', 'description', 'params'], 'safe'],
+            [['id', 'form_id', 'sort_order', 'is_required'], 'integer'],
+            [['name', 'type', 'status', 'label', 'description', 'params'], 'safe'],
         ];
     }
 
@@ -46,6 +46,11 @@ class FieldsSearch extends Fields
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> [
+                'defaultOrder' => [
+                    'sort_order' => SORT_ASC
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -60,14 +65,19 @@ class FieldsSearch extends Fields
         $query->andFilterWhere([
             'id' => $this->id,
             'form_id' => $this->form_id,
-            'type' => $this->type,
+            'name' => $this->name,
             'sort_order' => $this->sort_order,
             'is_required' => $this->is_required,
         ]);
 
+        if ($this->type !== "*")
+            $query->andFilterWhere(['like', 'type', $this->type]);
+
+        if ($this->status !== "*")
+            $query->andFilterWhere(['like', 'status', $this->status]);
+
         $query->andFilterWhere(['like', 'label', $this->label])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'params', $this->params]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

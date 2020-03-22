@@ -1,5 +1,6 @@
 <?php
 
+use wdmg\widgets\SelectInput;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -7,8 +8,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\vendor\wdmg\forms\models\FormsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = $this->context->module->name;
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('app/modules/forms', 'All forms');
+$this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Forms list');
 
 ?>
 <div class="page-header">
@@ -24,20 +25,48 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => '{summary}<br\/>{items}<br\/>{summary}<br\/><div class="text-center">{pager}</div>',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
+
             'name',
-            'slug',
+            'alias',
             'title',
             'description:ntext',
-            //'available',
+
+            [
+                'attribute' => 'status',
+                'format' => 'html',
+                'filter' => SelectInput::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'status',
+                    'items' => $searchModel->getStatusesList(true),
+                    'options' => [
+                        'class' => 'form-control'
+                    ]
+                ]),
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ],
+                'value' => function($data) {
+                    if ($data->status == $data::FORM_STATUS_PUBLISHED)
+                        return '<span class="label label-success">'.Yii::t('app/modules/forms','Published').'</span>';
+                    elseif ($data->status == $data::FORM_STATUS_DRAFT)
+                        return '<span class="label label-default">'.Yii::t('app/modules/forms','Draft').'</span>';
+                    else
+                        return $data->status;
+                }
+            ],
             //'created_at',
+            //'created_by',
             //'updated_at',
+            //'updated_by',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
     <hr/>
     <div>
-        <?= Html::a(Yii::t('app/modules/forms', 'Create form'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app/modules/forms', 'Create new form'), ['list/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>
     <?php Pjax::end(); ?>
 </div>

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\vendor\wdmg\forms\models\Submits */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = $this->context->module->name, 'url' => ['forms/list']];
+$this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['forms/list']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/forms', 'Submits'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

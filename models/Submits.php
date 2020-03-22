@@ -51,9 +51,9 @@ class Submits extends \yii\db\ActiveRecord
             'id' => Yii::t('app/modules/forms', 'ID'),
             'form_id' => Yii::t('app/modules/forms', 'Form ID'),
             'user_id' => Yii::t('app/modules/forms', 'User ID'),
-            'access_token' => Yii::t('app/modules/forms', 'Access Token'),
-            'created_at' => Yii::t('app/modules/forms', 'Created At'),
-            'updated_at' => Yii::t('app/modules/forms', 'Updated At'),
+            'access_token' => Yii::t('app/modules/forms', 'Access token'),
+            'created_at' => Yii::t('app/modules/forms', 'Created at'),
+            'updated_at' => Yii::t('app/modules/forms', 'Updated at'),
             'status' => Yii::t('app/modules/forms', 'Status'),
         ];
     }
