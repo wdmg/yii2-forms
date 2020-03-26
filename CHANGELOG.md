@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.0.11 (2020-03-26)
+ * Added pagination
+ * Up to date dependencies
+ 
 ## 1.0.10 (2020-03-22)
  * Rebuild migrations, views
  * Added translations

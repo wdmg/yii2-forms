@@ -63,6 +63,21 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Forms list');
             //'updated_by',
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'pager' => [
+            'options' => [
+                'class' => 'pagination',
+            ],
+            'maxButtonCount' => 5,
+            'activePageCssClass' => 'active',
+            'prevPageCssClass' => '',
+            'nextPageCssClass' => '',
+            'firstPageCssClass' => 'previous',
+            'lastPageCssClass' => 'next',
+            'firstPageLabel' => Yii::t('app/modules/forms', 'First page'),
+            'lastPageLabel'  => Yii::t('app/modules/forms', 'Last page'),
+            'prevPageLabel'  => Yii::t('app/modules/forms', '&larr; Prev page'),
+            'nextPageLabel'  => Yii::t('app/modules/forms', 'Next page &rarr;')
+        ],
     ]); ?>
     <hr/>
     <div>

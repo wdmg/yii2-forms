@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Fields list');
         <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
     </h1>
 </div>
-<div class="fields-index">
+<div class="forms-fields-index">
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -129,6 +129,21 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Fields list');
             ],
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'pager' => [
+            'options' => [
+                'class' => 'pagination',
+            ],
+            'maxButtonCount' => 5,
+            'activePageCssClass' => 'active',
+            'prevPageCssClass' => '',
+            'nextPageCssClass' => '',
+            'firstPageCssClass' => 'previous',
+            'lastPageCssClass' => 'next',
+            'firstPageLabel' => Yii::t('app/modules/forms', 'First page'),
+            'lastPageLabel'  => Yii::t('app/modules/forms', 'Last page'),
+            'prevPageLabel'  => Yii::t('app/modules/forms', '&larr; Prev page'),
+            'nextPageLabel'  => Yii::t('app/modules/forms', 'Next page &rarr;')
         ],
     ]); ?>
     <hr/>

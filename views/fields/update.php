@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Update');
         <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
     </h1>
 </div>
-<div class="fields-update">
+<div class="forms-fields-update">
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

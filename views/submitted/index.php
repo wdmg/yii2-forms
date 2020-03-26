@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Filling results');
         <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
     </h1>
 </div>
-<div class="submits-index">
+<div class="forms-submits-index">
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -33,6 +33,21 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Filling results');
             //'status',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'pager' => [
+            'options' => [
+                'class' => 'pagination',
+            ],
+            'maxButtonCount' => 5,
+            'activePageCssClass' => 'active',
+            'prevPageCssClass' => '',
+            'nextPageCssClass' => '',
+            'firstPageCssClass' => 'previous',
+            'lastPageCssClass' => 'next',
+            'firstPageLabel' => Yii::t('app/modules/forms', 'First page'),
+            'lastPageLabel'  => Yii::t('app/modules/forms', 'Last page'),
+            'prevPageLabel'  => Yii::t('app/modules/forms', '&larr; Prev page'),
+            'nextPageLabel'  => Yii::t('app/modules/forms', 'Next page &rarr;')
         ],
     ]); ?>
     <?php Pjax::end(); ?>

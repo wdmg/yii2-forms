@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
     </h1>
 </div>
-<div class="fields-view">
+<div class="forms-fields-view">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

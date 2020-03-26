@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
     </h1>
 </div>
-<div class="fields-create">
+<div class="forms-fields-create">
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
