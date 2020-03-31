@@ -91,8 +91,37 @@ class FieldsController extends Controller
     {
         $model = new Fields();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if ($model->save()) {
+                // Log activity
+                $this->module->logActivity(
+                    'New form field `' . $model->label . '` with ID `' . $model->id . '` has been successfully added.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'success',
+                    1
+                );
+
+                Yii::$app->getSession()->setFlash(
+                    'success',
+                    Yii::t('app/modules/forms', 'Form field has been successfully added!')
+                );
+
+                return $this->redirect(['fields/view', 'id' => $model->id]);
+            } else {
+                // Log activity
+                $this->module->logActivity(
+                    'An error occurred while add the new form field: ' . $model->label,
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
+
+                Yii::$app->getSession()->setFlash(
+                    'danger',
+                    Yii::t('app/modules/forms', 'An error occurred while add the form field.')
+                );
+            }
         }
 
         return $this->render('create', [
@@ -110,9 +139,48 @@ class FieldsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->save()) {
+                // Log activity
+                $this->module->logActivity(
+                    'Form field `' . $model->label . '` with ID `' . $model->id . '` has been successfully updated.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'success',
+                    1
+                );
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                Yii::$app->getSession()->setFlash(
+                    'success',
+                    Yii::t(
+                        'app/modules/forms',
+                        'OK! Form field `{label}` successfully updated.',
+                        [
+                            'label' => $model->label
+                        ]
+                    )
+                );
+
+                return $this->redirect(['fields/view', 'id' => $model->id]);
+            } else {
+                // Log activity
+                $this->module->logActivity(
+                    'An error occurred while update the form field `' . $model->label . '` with ID `' . $model->id . '`.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
+
+                Yii::$app->getSession()->setFlash(
+                    'danger',
+                    Yii::t(
+                        'app/modules/forms',
+                        'An error occurred while update a form field `{label}`.',
+                        [
+                            'label' => $model->label
+                        ]
+                    )
+                );
+            }
         }
 
         return $this->render('update', [
@@ -129,9 +197,48 @@ class FieldsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if ($model->delete()) {
+            // Log activity
+            $this->module->logActivity(
+                'Form field `' . $model->label . '` with ID `' . $model->id . '` has been successfully deleted.',
+                $this->uniqueId . ":" . $this->action->id,
+                'success',
+                1
+            );
 
-        return $this->redirect(['index']);
+            Yii::$app->getSession()->setFlash(
+                'success',
+                Yii::t(
+                    'app/modules/forms',
+                    'OK! Form field `{label}` successfully deleted.',
+                    [
+                        'label' => $model->label
+                    ]
+                )
+            );
+        } else {
+            // Log activity
+            $this->module->logActivity(
+                'An error occurred while deleting the form field `' . $model->label . '` with ID `' . $model->id . '`.',
+                $this->uniqueId . ":" . $this->action->id,
+                'danger',
+                1
+            );
+
+            Yii::$app->getSession()->setFlash(
+                'danger',
+                Yii::t(
+                    'app/modules/forms',
+                    'An error occurred while deleting a form field `{label}`.',
+                    [
+                        'label' => $model->label
+                    ]
+                )
+            );
+        }
+
+        return $this->redirect(['fields/index']);
     }
 
     /**

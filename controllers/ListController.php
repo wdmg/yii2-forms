@@ -91,8 +91,36 @@ class ListController extends Controller
     {
         $model = new Forms();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->save()) {
+                // Log activity
+                $this->module->logActivity(
+                    'New form `' . $model->name . '` with ID `' . $model->id . '` has been successfully added.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'success',
+                    1
+                );
+
+                Yii::$app->getSession()->setFlash(
+                    'success',
+                    Yii::t('app/modules/forms', 'Form has been successfully added!')
+                );
+
+                return $this->redirect(['list/view', 'id' => $model->id]);
+            } else {
+                // Log activity
+                $this->module->logActivity(
+                    'An error occurred while add the new form: ' . $model->name,
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
+
+                Yii::$app->getSession()->setFlash(
+                    'danger',
+                    Yii::t('app/modules/forms', 'An error occurred while add the form.')
+                );
+            }
         }
 
         return $this->render('create', [
@@ -111,8 +139,48 @@ class ListController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->save()) {
+                // Log activity
+                $this->module->logActivity(
+                    'Form `' . $model->name . '` with ID `' . $model->id . '` has been successfully updated.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'success',
+                    1
+                );
+
+                Yii::$app->getSession()->setFlash(
+                    'success',
+                    Yii::t(
+                        'app/modules/forms',
+                        'OK! Form `{name}` successfully updated.',
+                        [
+                            'name' => $model->name
+                        ]
+                    )
+                );
+
+                return $this->redirect(['list/view', 'id' => $model->id]);
+            } else {
+                // Log activity
+                $this->module->logActivity(
+                    'An error occurred while update the form `' . $model->name . '` with ID `' . $model->id . '`.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
+
+                Yii::$app->getSession()->setFlash(
+                    'danger',
+                    Yii::t(
+                        'app/modules/forms',
+                        'An error occurred while update a form `{name}`.',
+                        [
+                            'name' => $model->name
+                        ]
+                    )
+                );
+            }
         }
 
         return $this->render('update', [
@@ -129,9 +197,49 @@ class ListController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if ($model->delete()) {
 
-        return $this->redirect(['index']);
+            // Log activity
+            $this->module->logActivity(
+                'Form `' . $model->name . '` with ID `' . $model->id . '` has been successfully deleted.',
+                $this->uniqueId . ":" . $this->action->id,
+                'success',
+                1
+            );
+
+            Yii::$app->getSession()->setFlash(
+                'success',
+                Yii::t(
+                    'app/modules/forms',
+                    'OK! Form `{name}` successfully deleted.',
+                    [
+                        'name' => $model->name
+                    ]
+                )
+            );
+        } else {
+            // Log activity
+            $this->module->logActivity(
+                'An error occurred while deleting the form `' . $model->name . '` with ID `' . $model->id . '`.',
+                $this->uniqueId . ":" . $this->action->id,
+                'danger',
+                1
+            );
+
+            Yii::$app->getSession()->setFlash(
+                'danger',
+                Yii::t(
+                    'app/modules/forms',
+                    'An error occurred while deleting a form `{name}`.',
+                    [
+                        'name' => $model->name
+                    ]
+                )
+            );
+        }
+
+        return $this->redirect(['list/index']);
     }
 
     /**

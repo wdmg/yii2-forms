@@ -69,8 +69,19 @@ return [
     'Access token' => "Токен доступа",
     'Status' => "Статус",
 
+    'Form has been successfully added!' => "Форма была успешно добавлена!",
+    'An error occurred while add the form.' => "Произошла ошибка при добавлении формы.",
+    'OK! Form `{name}` successfully updated.' => "ОК! Форма `{name}` успешно обновлена.",
+    'An error occurred while update a form `{name}`.' => "Произошла ошибка при обновлении формы `{name}`.",
+    'OK! Form `{name}` successfully deleted.' => "ОК! Форма `{name}` успешно удалена.",
+    'An error occurred while deleting a form `{name}`.' => "Произошла ошибка при удалении формы `{name}`.",
 
-
+    'Form field has been successfully added!' => "Поле формы успешно добавлено!",
+    'An error occurred while add the form field.' => "Произошла ошибка при добавлении поля формы.",
+    'OK! Form field `{label}` successfully updated.' => "ОК! Поле формы `{label}` успешно обновлено.",
+    'An error occurred while update a form field `{label}`.' => "Произошла ошибка при обновлении поля формы `{label}`.",
+    'OK! Form field `{label}` successfully deleted.' => "ОК! Поле формы `{label}` успешно удалено.",
+    'An error occurred while deleting a form field `{label}`.' => "Произошла ошибка при удалении поля формы `{label}`.",
 
 ];
 
