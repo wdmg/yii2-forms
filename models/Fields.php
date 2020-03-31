@@ -2,6 +2,7 @@
 
 namespace wdmg\forms\models;
 
+use function GuzzleHttp\Psr7\_caseless_remove;
 use Yii;
 use wdmg\forms\models\Forms;
 use yii\behaviors\BlameableBehavior;
@@ -16,6 +17,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property int $form_id
+ * @property string $name
  * @property string $label
  * @property string $description
  * @property int $type
@@ -55,6 +57,8 @@ class Fields extends \yii\db\ActiveRecord
         19 => 'month',
         20 => 'week'
     ];
+
+    public $attribute;
 
     /**
      * {@inheritdoc}
@@ -146,6 +150,15 @@ class Fields extends \yii\db\ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->attribute = str_replace('-', '_', $this->name);
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getFormsContents()
@@ -173,6 +186,57 @@ class Fields extends \yii\db\ActiveRecord
         $list = ArrayHelper::merge($list, $this->fieldsTypes);
 
         return $list;
+    }
+
+    /**
+     *
+     */
+    public function getValidator()
+    {
+        switch ($this->type) {
+            case 1: // 'text'
+                return 'string';
+            case 2: // 'textarea'
+                return 'string';
+            case 3: // 'checkbox'
+                return 'string';
+            case 4: // 'file'
+                return 'string';
+            case 5: // 'hidden'
+                return 'string';
+            case 6: // 'password'
+                return 'string';
+            case 7: // 'radio'
+                return 'string';
+            case 8: // 'color'
+                return 'string';
+            case 9: // 'date'
+                return 'string';
+            case 10: // 'datetime'
+                return 'string';
+            case 11: // 'datetime-local'
+                return 'string';
+            case 12: // 'email'
+                return 'string';
+            case 13: // 'number'
+                return 'string';
+            case 14: // 'range'
+                return 'string';
+            case 15: // 'search'
+                return 'string';
+            case 16: // 'tel'
+                return 'string';
+            case 17: // 'time'
+                return 'string';
+            case 18: // 'url'
+                return 'string';
+            case 19: // 'month'
+                return 'string';
+            case 20: // 'week'
+                return 'string';
+            default:
+                return 'string';
+        }
     }
 
     /**

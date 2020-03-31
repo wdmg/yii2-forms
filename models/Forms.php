@@ -8,6 +8,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%forms_list}}".
@@ -117,9 +118,12 @@ class Forms extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFormsFields()
+    public function getFormsFields($onlyPublished = false)
     {
-        return $this->hasMany(FormsFields::class, ['form_id' => 'id']);
+        if ($onlyPublished)
+            return $this->hasMany(Fields::class, ['form_id' => 'id'])->where(['status' => Fields::FIELD_STATUS_PUBLISHED])->orderBy(['sort_order' => SORT_ASC]);
+        else
+            return $this->hasMany(Fields::class, ['form_id' => 'id'])->orderBy(['sort_order' => SORT_ASC]);
     }
 
     /**
@@ -127,7 +131,7 @@ class Forms extends \yii\db\ActiveRecord
      */
     public function getFormsSubmits()
     {
-        return $this->hasMany(FormsSubmits::class, ['form_id' => 'id']);
+        return $this->hasMany(Submits::class, ['form_id' => 'id']);
     }
 
     /**
@@ -168,5 +172,34 @@ class Forms extends \yii\db\ActiveRecord
                 self::FORM_STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
                 self::FORM_STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
             ];
+    }
+
+    /**
+     * Returns only published form(s)
+     *
+     * @param null $cond
+     * @param bool $onlyOne
+     * @param bool $asArray
+     * @return array|ActiveRecord|ActiveRecord[]|null
+     */
+    public function getPublished($cond = null, $onlyOne = false, $asArray = false) {
+        if (!is_null($cond) && is_array($cond))
+            $models = self::find()->where(ArrayHelper::merge($cond, ['status' => self::FORM_STATUS_PUBLISHED]));
+        elseif (!is_null($cond) && is_string($cond))
+            $models = self::find()->where(ArrayHelper::merge([$cond], ['status' => self::FORM_STATUS_PUBLISHED]));
+        else
+            $models = self::find()->where(['status' => self::FORM_STATUS_PUBLISHED]);
+
+        if ($onlyOne) {
+            if ($asArray)
+                return $models->asArray()->one();
+            else
+                return $models->one();
+        } else {
+            if ($asArray)
+                return $models->asArray()->all();
+            else
+                return $models->all();
+        }
     }
 }

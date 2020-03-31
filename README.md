@@ -43,6 +43,23 @@ To add a module to the project, add the following data in your configuration fil
         ...
     ],
 
+# Usage examples
+To build the ActiveForm with fields you may use the component method Yii::$app->forms->build() with `id` or `alias` of form item.
+
+**View in frontend**
+
+    <?php
+        use yii\widgets\ActiveForm;
+        ...
+        
+        <h3>Feedback</h3>
+        <?php $form = ActiveForm::begin(); ?>
+        <?= Yii::$app->forms->build($form, 'feedback-form'); ?>
+        <?= Html::submitButton('Submit') ?>
+        <?php ActiveForm::end(); ?>
+        
+    ?>
+
 # Routing
 Use the `Module::dashboardNavItems()` method of the module to generate a navigation items list for NavBar, like this:
 
@@ -59,6 +76,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 
 
 # Status and version [in progress development]
+* v.1.0.12 - Added forms component
 * v.1.0.11 - Added pagination, up to date dependencies
 * v.1.0.10 - Rebuild migrations, views
 * v.1.0.9 - Fixed deprecated class declaration
