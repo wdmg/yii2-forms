@@ -76,6 +76,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 
 
 # Status and version [in progress development]
+* v.1.0.13 - Update dependencies
 * v.1.0.12 - Log activity and translations, added forms component
 * v.1.0.11 - Added pagination, up to date dependencies
 * v.1.0.10 - Rebuild migrations, views

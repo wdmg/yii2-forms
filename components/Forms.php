@@ -7,7 +7,7 @@ namespace wdmg\forms\components;
  * Yii2 Forms
  *
  * @category        Component
- * @version         1.0.12
+ * @version         1.0.13
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
@@ -17,7 +17,7 @@ namespace wdmg\forms\components;
 
 use Yii;
 use yii\base\Component;
-use wdmg\base\DynamicModel;
+use wdmg\base\models\DynamicModel;
 use yii\base\InvalidArgumentException;
 use yii\helpers\ArrayHelper;
 

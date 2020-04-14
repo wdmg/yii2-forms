@@ -6,7 +6,7 @@ namespace wdmg\forms;
  * Yii2 Forms
  *
  * @category        Module
- * @version         1.0.12
+ * @version         1.0.13
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
@@ -45,7 +45,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.0.12";
+    private $version = "1.0.13";
 
     /**
      * @var integer, priority of initialization

@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.13 (2020-04-14)
+ * Update dependencies
+ 
 ## 1.0.12 (2020-04-01)
  * Log activity and translations
  * Added forms component
