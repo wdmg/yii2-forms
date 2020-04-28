@@ -1,11 +1,11 @@
-[![Progress](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
-[![Github all releases](https://img.shields.io/github/downloads/wdmg/yii2-forms/total.svg)](https://GitHub.com/wdmg/yii2-forms/releases/)
-[![GitHub version](https://badge.fury.io/gh/wdmg%2Fyii2-forms.svg)](https://github.com/wdmg/yii2-forms)
+[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
+[![Downloads](https://img.shields.io/packagist/dt/wdmg/yii2-forms.svg)](https://packagist.org/packages/wdmg/yii2-forms)
+[![Packagist Version](https://img.shields.io/packagist/v/wdmg/yii2-forms.svg)](https://packagist.org/packages/wdmg/yii2-forms)
 ![Progress](https://img.shields.io/badge/progress-in_development-red.svg)
 [![GitHub license](https://img.shields.io/github/license/wdmg/yii2-forms.svg)](https://github.com/wdmg/yii2-forms/blob/master/LICENSE)
 
-# Yii2 Forms Module
-Creation and management of user forms
+# Yii2 Forms
+Creation and management of custom user forms
 
 # Requirements 
 * PHP 5.6 or higher
