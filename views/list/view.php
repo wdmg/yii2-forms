@@ -9,7 +9,14 @@ use yii\widgets\DetailView;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
+
+$bundle = false;
+if ($model->locale && isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsset')) {
+    $bundle = \wdmg\translations\FlagsAsset::register(Yii::$app->view);
+}
+
 ?>
 <div class="page-header">
     <h1>
@@ -26,6 +33,35 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description:ntext',
 
+            [
+                'attribute' => 'locale',
+                'label' => Yii::t('app/modules/forms','Language'),
+                'format' => 'raw',
+                'value' => function($data) use ($bundle) {
+                    if ($data->locale) {
+                        if ($bundle) {
+                            $locale = Yii::$app->translations->parseLocale($data->locale, Yii::$app->language);
+                            if ($data->locale === $locale['locale']) { // Fixing default locale from PECL intl
+                                if (!($country = $locale['domain']))
+                                    $country = '_unknown';
+
+                                $flag = \yii\helpers\Html::img($bundle->baseUrl . '/flags-iso/flat/24/' . $country . '.png', [
+                                    'title' => $locale['name']
+                                ]);
+                                return $flag . " " . $locale['name'];
+                            }
+                        } else {
+                            if (extension_loaded('intl'))
+                                $language = mb_convert_case(trim(\Locale::getDisplayLanguage($data->locale, Yii::$app->language)), MB_CASE_TITLE, "UTF-8");
+                            else
+                                $language = $data->locale;
+
+                            return $language;
+                        }
+                    }
+                    return null;
+                }
+            ],
             [
                 'attribute' => 'status',
                 'format' => 'html',

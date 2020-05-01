@@ -2,6 +2,7 @@ Changelog
 =========
 
 ## 1.*
+ * Added flags and language labels
  * Added demo data
  * Multi-language support, migrations
  

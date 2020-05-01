@@ -267,7 +267,7 @@ class Fields extends ActiveRecordML
         if ($allTags)
             $list['*'] = Yii::t('app/modules/forms', 'All forms');
 
-        if ($tags = $this->getAllForms(null, ['id', 'name'], true)) {
+        if ($tags = $this->getAllForms(['source_id' => null], ['id', 'name'], true)) {
             $list = ArrayHelper::merge($list, ArrayHelper::map($tags, 'id', 'name'));
         }
 

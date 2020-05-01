@@ -85,7 +85,9 @@ return [
     'OK! Form field `{label}` successfully deleted.' => "ОК! Поле формы `{label}` успешно удалено.",
     'An error occurred while deleting a form field `{label}`.' => "Произошла ошибка при удалении поля формы `{label}`.",
 
+    'Language' => "Язык",
     'Language version' => "Языковая версия",
+    'Language versions' => "Языковые версии",
     'Are you sure you want to delete this form?' => "Вы действительно желаете удалить эту форму?",
 
     'Actions' => "Действия",
