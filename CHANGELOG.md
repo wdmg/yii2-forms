@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.*
+ * Added demo data
+ * Multi-language support, migrations
+ 
 ## 1.0.13 (2020-04-14)
  * Update dependencies
  

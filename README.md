@@ -24,6 +24,7 @@ After configure db connection, run the following command in the console:
 And select the operation you want to perform:
   1) Apply all module migrations
   2) Revert all module migrations
+  3) Add demo data
 
 # Migrations
 In any case, you can execute the migration and create the initial data, run the following command in the console:
@@ -51,14 +52,20 @@ To build the ActiveForm with fields you may use the component method Yii::$app->
     <?php
         use yii\widgets\ActiveForm;
         ...
-        
-        <h3>Feedback</h3>
-        <?php $form = ActiveForm::begin(); ?>
-        <?= Yii::$app->forms->build($form, 'feedback-form'); ?>
-        <?= Html::submitButton('Submit') ?>
-        <?php ActiveForm::end(); ?>
-        
     ?>
+        
+    <h3>Feedback</h3>
+    <?php $form = ActiveForm::begin(); ?>
+    <?= Yii::$app->forms->build($form, 'feedback-form'); ?>
+    <?= Html::submitButton('Submit') ?>
+    <?php ActiveForm::end(); ?>
+    ...
+    
+    <h3>Callback</h3>
+    <?php $form = ActiveForm::begin(); ?>
+    <?= Yii::$app->forms->build($form, 'сallback-form'); ?>
+    <?= Html::submitButton('Submit') ?>
+    <?php ActiveForm::end(); ?>
 
 # Routing
 Use the `Module::dashboardNavItems()` method of the module to generate a navigation items list for NavBar, like this:

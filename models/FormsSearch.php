@@ -54,6 +54,11 @@ class FormsSearch extends Forms
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        } else {
+            // query all without languages version
+            $query->where([
+                'source_id' => null,
+            ]);
         }
 
         // grid filtering conditions

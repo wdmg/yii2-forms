@@ -1,9 +1,10 @@
 <?php
 
-use wdmg\widgets\Editor;
-use wdmg\widgets\SelectInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use wdmg\widgets\Editor;
+use wdmg\widgets\LangSwitcher;
+use wdmg\widgets\SelectInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\vendor\wdmg\forms\models\Forms */
@@ -11,8 +12,30 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="forms-form">
+    <?php
+        echo LangSwitcher::widget([
+            'label' => Yii::t('app/modules/forms', 'Language version'),
+            'model' => $model,
+            'renderWidget' => 'button-group',
+            'createRoute' => 'list/create',
+            'updateRoute' => 'list/update',
+            'supportLocales' => $this->context->module->supportLocales,
+            //'currentLocale' => $this->context->getLocale(),
+            'versions' => (isset($model->source_id)) ? $model->getAllVersions($model->source_id, true) : $model->getAllVersions($model->id, true),
+            'options' => [
+                'id' => 'locale-switcher',
+                'class' => 'pull-right'
+            ]
+        ]);
+    ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => "addNewForm",
+        'enableAjaxValidation' => true,
+        'options' => [
+            'enctype' => 'multipart/form-data'
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -35,7 +58,35 @@ use yii\widgets\ActiveForm;
     <hr/>
     <div class="form-group">
         <?= Html::a(Yii::t('app/modules/forms', '&larr; Back to list'), ['list/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
-        <?= Html::submitButton(Yii::t('app/modules/forms', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::submitButton(Yii::t('app/modules/forms', 'Save'), ['class' => 'btn btn-save btn-success pull-right']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
+
+<?php $this->registerJs(<<< JS
+    $(document).ready(function() {
+        function afterValidateAttribute(event, attribute, messages)
+        {
+            if (attribute.name && !attribute.alias && messages.length == 0) {
+                var form = $(event.target);
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serializeArray(),
+                }).done(function(data) {
+                    if (data.alias && form.find('#forms-alias').val().length == 0) {
+                        form.find('#forms-alias').val(data.alias);
+                        form.find('#forms-alias').change();
+                        form.yiiActiveForm('validateAttribute', 'forms-alias');
+                    }
+                }).fail(function () {
+                    /*form.find('#options-type').val("");
+                    form.find('#options-type').trigger('change');*/
+                });
+                return false; // prevent default form submission
+            }
+        }
+        $("#addNewForm").on("afterValidateAttribute", afterValidateAttribute);
+    });
+JS
+); ?>

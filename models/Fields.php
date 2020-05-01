@@ -2,8 +2,8 @@
 
 namespace wdmg\forms\models;
 
-use function GuzzleHttp\Psr7\_caseless_remove;
 use Yii;
+use wdmg\base\models\ActiveRecordML;
 use wdmg\forms\models\Forms;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
@@ -29,11 +29,11 @@ use yii\helpers\ArrayHelper;
  * @property FormsContent[] $formsContents
  * @property FormsList $form
  */
-class Fields extends \yii\db\ActiveRecord
+class Fields extends ActiveRecordML
 {
 
-    const FIELD_STATUS_DRAFT = 0; // Form field has draft
-    const FIELD_STATUS_PUBLISHED = 1; // Form field has been published
+    const STATUS_DRAFT = 0; // Form field has draft
+    const STATUS_PUBLISHED = 1; // Form field has been published
 
     private $fieldsTypes = [
         1 => 'text',
@@ -77,8 +77,8 @@ class Fields extends \yii\db\ActiveRecord
             'timestamp' => [
                 'class' => TimestampBehavior::class,
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+                    ActiveRecordML::EVENT_BEFORE_INSERT => 'created_at',
+                    ActiveRecordML::EVENT_BEFORE_UPDATE => 'updated_at',
                 ],
                 'value' => new Expression('NOW()'),
             ],
@@ -133,8 +133,8 @@ class Fields extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app/modules/forms', 'ID'),
             'form_id' => Yii::t('app/modules/forms', 'Form ID'),
-            'label' => Yii::t('app/modules/forms', 'Label'),
-            'name' => Yii::t('app/modules/forms', 'Name'),
+            'label' => Yii::t('app/modules/forms', 'Field label'),
+            'name' => Yii::t('app/modules/forms', 'Input name'),
             'placeholder' => Yii::t('app/modules/forms', 'Placeholder'),
             'description' => Yii::t('app/modules/forms', 'Description'),
             'type' => Yii::t('app/modules/forms', 'Type'),
@@ -304,13 +304,13 @@ class Fields extends \yii\db\ActiveRecord
         if ($allStatuses)
             return [
                 '*' => Yii::t('app/modules/forms', 'All statuses'),
-                self::FIELD_STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
-                self::FIELD_STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
+                self::STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
+                self::STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
             ];
         else
             return [
-                self::FIELD_STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
-                self::FIELD_STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
+                self::STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
+                self::STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
             ];
     }
 }

@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'label',
+            'name',
             'description',
             [
                 'attribute' => 'type',
@@ -63,9 +64,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'format' => 'html',
                 'value' => function($data) {
-                    if ($data->status == $data::FIELD_STATUS_PUBLISHED)
+                    if ($data->status == $data::STATUS_PUBLISHED)
                         return '<span class="label label-success">'.Yii::t('app/modules/forms','Published').'</span>';
-                    elseif ($data->status == $data::FIELD_STATUS_DRAFT)
+                    elseif ($data->status == $data::STATUS_DRAFT)
                         return '<span class="label label-default">'.Yii::t('app/modules/forms','Draft').'</span>';
                     else
                         return $data->status;
@@ -124,13 +125,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app/modules/forms', '&larr; Back to list'), ['fields/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
         <div class="form-group pull-right">
             <?= Html::a(Yii::t('app/modules/forms', 'Delete'), ['fields/delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
+                'class' => 'btn btn-delete btn-danger',
                 'data' => [
                     'confirm' => Yii::t('app/modules/forms', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
             ]); ?>
-            <?= Html::a(Yii::t('app/modules/forms', 'Update'), ['fields/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('app/modules/forms', 'Update'), ['fields/update', 'id' => $model->id], ['class' => 'btn btn-edit btn-primary']) ?>
         </div>
     </div>
 </div>

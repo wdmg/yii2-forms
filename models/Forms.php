@@ -3,10 +3,10 @@
 namespace wdmg\forms\models;
 
 use Yii;
+use wdmg\base\models\ActiveRecordML;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
@@ -27,11 +27,11 @@ use yii\helpers\ArrayHelper;
  * @property FormsFields[] $formsFields
  * @property FormsSubmits[] $formsSubmits
  */
-class Forms extends \yii\db\ActiveRecord
+class Forms extends ActiveRecordML
 {
 
-    const FORM_STATUS_DRAFT = 0; // Form has draft
-    const FORM_STATUS_PUBLISHED = 1; // Form has been published
+    const STATUS_DRAFT = 0; // Form has draft
+    const STATUS_PUBLISHED = 1; // Form has been published
 
     /**
      * {@inheritdoc}
@@ -50,8 +50,8 @@ class Forms extends \yii\db\ActiveRecord
             'timestamp' => [
                 'class' => TimestampBehavior::class,
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+                    ActiveRecordML::EVENT_BEFORE_INSERT => 'created_at',
+                    ActiveRecordML::EVENT_BEFORE_UPDATE => 'updated_at',
                 ],
                 'value' => new Expression('NOW()'),
             ],
@@ -118,17 +118,6 @@ class Forms extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFormsFields($onlyPublished = false)
-    {
-        if ($onlyPublished)
-            return $this->hasMany(Fields::class, ['form_id' => 'id'])->where(['status' => Fields::FIELD_STATUS_PUBLISHED])->orderBy(['sort_order' => SORT_ASC]);
-        else
-            return $this->hasMany(Fields::class, ['form_id' => 'id'])->orderBy(['sort_order' => SORT_ASC]);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getFormsSubmits()
     {
         return $this->hasMany(Submits::class, ['form_id' => 'id']);
@@ -164,13 +153,13 @@ class Forms extends \yii\db\ActiveRecord
         if ($allStatuses)
             return [
                 '*' => Yii::t('app/modules/forms', 'All statuses'),
-                self::FORM_STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
-                self::FORM_STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
+                self::STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
+                self::STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
             ];
         else
             return [
-                self::FORM_STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
-                self::FORM_STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
+                self::STATUS_DRAFT => Yii::t('app/modules/forms', 'Draft'),
+                self::STATUS_PUBLISHED => Yii::t('app/modules/forms', 'Published'),
             ];
     }
 
@@ -182,13 +171,15 @@ class Forms extends \yii\db\ActiveRecord
      * @param bool $asArray
      * @return array|ActiveRecord|ActiveRecord[]|null
      */
-    public function getPublished($cond = null, $onlyOne = false, $asArray = false) {
+    public static function getPublished($cond = null, $onlyOne = false, $asArray = false) {
+
         if (!is_null($cond) && is_array($cond))
-            $models = self::find()->where(ArrayHelper::merge($cond, ['status' => self::FORM_STATUS_PUBLISHED]));
+            $models = self::find()
+                ->where(ArrayHelper::merge($cond, ['status' => self::STATUS_PUBLISHED]));
         elseif (!is_null($cond) && is_string($cond))
-            $models = self::find()->where(ArrayHelper::merge([$cond], ['status' => self::FORM_STATUS_PUBLISHED]));
+            $models = self::find()->where(ArrayHelper::merge([$cond], ['status' => self::STATUS_PUBLISHED]));
         else
-            $models = self::find()->where(['status' => self::FORM_STATUS_PUBLISHED]);
+            $models = self::find()->where(['status' => self::STATUS_PUBLISHED]);
 
         if ($onlyOne) {
             if ($asArray)
@@ -201,5 +192,43 @@ class Forms extends \yii\db\ActiveRecord
             else
                 return $models->all();
         }
+    }
+
+    /**
+     * Returns all/one published/all form field(s)
+     *
+     * @param null $cond
+     * @param bool $onlyPublished
+     * @param bool $onlyOne
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFormsFields($cond = null, $onlyPublished = false, $onlyOne = false)
+    {
+        if ($onlyOne) {
+            if (is_null($this->source_id))
+                $query = $this->hasOne(Fields::class, ['form_id' => 'id']);
+            else
+                $query = $this->hasOne(Fields::class, ['form_id' => 'source_id']);
+        } else {
+            if (is_null($this->source_id))
+                $query = $this->hasMany(Fields::class, ['form_id' => 'id']);
+            else
+                $query = $this->hasMany(Fields::class, ['form_id' => 'source_id']);
+        }
+
+        if (!is_null($cond) && is_string($cond))
+            $cond = [$cond];
+        elseif (is_null($cond))
+            $cond = [];
+
+        if ($onlyPublished)
+            $query->where(ArrayHelper::merge($cond, ['status' => Fields::STATUS_PUBLISHED]));
+        else
+            $query->where($cond);
+
+
+
+
+        return $query->orderBy(['sort_order' => SORT_ASC]);
     }
 }

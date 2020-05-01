@@ -42,12 +42,19 @@ class Forms extends Component
         if (is_null($id))
             return null;
 
-        if (!$form = $this->model->getPublished(['id' => $id], $onlyOne = true))
-            $form = $this->model->getPublished(['alias' => $id], $onlyOne = true);
+        if (is_string($id))
+            $form = $this->model->getPublished(['alias' => $id], true);
+        else
+            $form = $this->model->getPublished(['id' => $id], true);
 
         if ($form) {
+
+            $locale = Yii::$app->sourceLanguage;
+            if (Yii::$app->language)
+                $locale = Yii::$app->language;
+
             $output = '';
-            if ($fields = $form->getFormsFields(true)->all()) {
+            if ($fields = $form->getFormsFields(['locale' => $locale], true, false)->all()) {
 
                 // @TODO: Add default controller for form submits and storage data
                 // @TODO: Add custom options for forms
