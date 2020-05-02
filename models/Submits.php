@@ -38,7 +38,7 @@ class Submits extends \yii\db\ActiveRecord
             [['form_id', 'user_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['access_token'], 'string', 'max' => 32],
-            //[['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => FormsList::class, 'targetAttribute' => ['form_id' => 'id']],
+            [['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => Forms::class, 'targetAttribute' => ['form_id' => 'id']],
         ];
     }
 
@@ -63,7 +63,7 @@ class Submits extends \yii\db\ActiveRecord
      */
     public function getFormsContents()
     {
-        return $this->hasMany(FormsContent::class, ['submit_id' => 'id']);
+        return $this->hasMany(Content::class, ['submit_id' => 'id']);
     }
 
     /**
@@ -71,6 +71,6 @@ class Submits extends \yii\db\ActiveRecord
      */
     public function getForm()
     {
-        return $this->hasOne(FormsList::class, ['id' => 'form_id']);
+        return $this->hasOne(Forms::class, ['id' => 'form_id']);
     }
 }

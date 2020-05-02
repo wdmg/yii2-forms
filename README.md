@@ -67,6 +67,18 @@ To build the ActiveForm with fields you may use the component method Yii::$app->
     <?= Html::submitButton('Submit') ?>
     <?php ActiveForm::end(); ?>
 
+**Action in Controller**
+
+    <?php
+        if (!is_null($result = Yii::$app->forms->submit('feedback-form', $data))) {
+            if ($result === true) {
+                Yii::$app->session->setFlash('success', 'Your Feedback form successfully submitted!');
+            } else {
+                Yii::$app->session->setFlash('danger', 'An error occurred while sending the Feedback form.');
+            }
+        }
+    ?>
+
 # Routing
 Use the `Module::dashboardNavItems()` method of the module to generate a navigation items list for NavBar, like this:
 

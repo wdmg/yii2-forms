@@ -2,6 +2,7 @@ Changelog
 =========
 
 ## 1.*
+ * Added submit() method for Form component
  * SluggableBehavior for Fields name
  * Added flags and language labels
  * Added demo data
