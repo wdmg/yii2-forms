@@ -85,6 +85,9 @@ return [
     'OK! Form field `{label}` successfully deleted.' => "ОК! Поле формы `{label}` успешно удалено.",
     'An error occurred while deleting a form field `{label}`.' => "Произошла ошибка при удалении поля формы `{label}`.",
 
+    'The attribute must begin with a letter.' => "Атрибут должен начинаться на букву",
+    'It allowed only Latin alphabet, numbers and «_» character.' => "Допускается использование только латинского алфавита, цифр и символа «_».",
+
     'Language' => "Язык",
     'Language version' => "Языковая версия",
     'Language versions' => "Языковые версии",

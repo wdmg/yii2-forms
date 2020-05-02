@@ -2,6 +2,7 @@ Changelog
 =========
 
 ## 1.*
+ * SluggableBehavior for Fields name
  * Added flags and language labels
  * Added demo data
  * Multi-language support, migrations

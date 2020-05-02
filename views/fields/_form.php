@@ -98,8 +98,8 @@ use wdmg\widgets\SelectInput;
                     url: form.attr('action'),
                     data: form.serializeArray(),
                 }).done(function(data) {
-                    if (data.alias && form.find('#fields-name').val().length == 0) {
-                        form.find('#fields-name').val(data.alias);
+                    if (data.name && form.find('#fields-name').val().length == 0) {
+                        form.find('#fields-name').val(data.name);
                         form.find('#fields-name').change();
                         form.yiiActiveForm('validateAttribute', 'fields-name');
                     }
