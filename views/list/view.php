@@ -31,8 +31,13 @@ if ($model->locale && isset(Yii::$app->translations) && class_exists('\wdmg\tran
             'name',
             'alias',
             'title',
-            'description:ntext',
-
+            [
+                'attribute' => 'description',
+                'format' => 'html',
+                'contentOptions' => [
+                    'style' => 'display:inline-block;max-height:360px;overflow-x:auto;'
+                ]
+            ],
             [
                 'attribute' => 'locale',
                 'label' => Yii::t('app/modules/forms','Language'),

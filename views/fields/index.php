@@ -5,6 +5,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\vendor\wdmg\forms\models\FieldsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -63,8 +64,13 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
 
             'label',
             'name',
-            'description',
-
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+                'value' => function($model) {
+                    return mb_strimwidth(strip_tags($model->description), 0, 120, '…');
+                }
+            ],
             [
                 'attribute' => 'type',
                 'format' => 'html',

@@ -43,7 +43,7 @@ if ($model->locale && isset(Yii::$app->translations) && class_exists('\wdmg\tran
             ],
             'label',
             'name',
-            'description',
+            'description:ntext',
             [
                 'attribute' => 'type',
                 'value' => function($data) {

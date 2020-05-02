@@ -1,10 +1,12 @@
 <?php
 
+use wdmg\helpers\StringHelper;
 use wdmg\widgets\SelectInput;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\vendor\wdmg\forms\models\FormsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -35,8 +37,16 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
             'name',
             'alias',
             'title',
-            'description:ntext',
-
+            [
+                'attribute' => 'description',
+                'format' => 'text',
+                'value' => function($data) {
+                    if (!empty($data->description))
+                        return StringHelper::truncateWords(StringHelper::stripTags($data->description, "", " "),12,'…');
+                    else
+                        return null;
+                }
+            ],
             [
                 'attribute' => 'locale',
                 'label' => Yii::t('app/modules/forms','Language versions'),
