@@ -2,6 +2,7 @@
 
 namespace wdmg\forms\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use wdmg\forms\models\Submits;
@@ -11,13 +12,17 @@ use wdmg\forms\models\Submits;
  */
 class SubmitsSearch extends Submits
 {
+
+    public $contents;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'form_id', 'user_id', 'status'], 'integer'],
+            [['form_id', 'user_id', 'status'], 'safe'],
+            [['contents'], 'string'],
             [['access_token', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -40,12 +45,17 @@ class SubmitsSearch extends Submits
      */
     public function search($params)
     {
-        $query = Submits::find();
+        $query = Submits::find()->alias('submits');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -56,17 +66,30 @@ class SubmitsSearch extends Submits
             return $dataProvider;
         }
 
+        if ($this->contents) {
+            $query->joinWith('formsContents');
+            $query->where(['like', 'value', $this->contents]);
+        }
+
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'form_id' => $this->form_id,
-            'user_id' => $this->user_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'access_token', $this->access_token]);
+        if ($this->form_id !== "*")
+            $query->andFilterWhere(['form_id' => $this->form_id]);
+
+        if ($this->user_id !== "*")
+            $query->andFilterWhere(['form_id' => $this->user_id]);
+
+        if ($this->status !== "*")
+            $query->andFilterWhere(['like', 'status', $this->status]);
+
+        if ($this->access_token)
+            $query->andFilterWhere(['like', 'access_token', $this->access_token]);
 
         return $dataProvider;
     }

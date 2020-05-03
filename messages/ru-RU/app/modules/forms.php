@@ -71,6 +71,20 @@ return [
     'Access token' => "Токен доступа",
     'Status' => "Статус",
 
+    'User' => "Пользователь",
+    'Form' => "Форма",
+    'Guest' => "Гость",
+
+    'Not submitted' => "Не отправлено",
+    'Submitted' => "Отправлено",
+    'Submitted forms' => "Отправленные формы",
+
+    ' … and {count, number} more {count, plural, one{field} few{fields} other{fields}}' => " … и еще {count, number} {count, plural, one{поле} few{поля} other{полей}}.",
+
+    'Contents' => "Данные заполнения",
+    'Form fill data' => "Данные заполнения формы",
+    'Form submission details' => "Детали отправки формы",
+
     'Form has been successfully added!' => "Форма была успешно добавлена!",
     'An error occurred while add the form.' => "Произошла ошибка при добавлении формы.",
     'OK! Form `{name}` successfully updated.' => "ОК! Форма `{name}` успешно обновлена.",

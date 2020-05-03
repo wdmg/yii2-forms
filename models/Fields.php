@@ -161,13 +161,36 @@ class Fields extends ActiveRecordML
     /**
      * @return array
      */
+    public function getFieldsTypes()
+    {
+        return $this->fieldsTypes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFieldType($type = null)
+    {
+        if (is_null($type))
+            return null;
+
+        $types = $this->getFieldsTypes();
+        if (isset($types[$type]))
+            return $types[$type];
+        else
+            return null;
+    }
+
+    /**
+     * @return array
+     */
     public function getFieldsTypesList($allTypes = false)
     {
         $list = [];
         if ($allTypes)
             $list['*'] = Yii::t('app/modules/forms', 'All types');
 
-        $list = ArrayHelper::merge($list, $this->fieldsTypes);
+        $list = ArrayHelper::merge($list, $this->getFieldsTypes());
 
         return $list;
     }
@@ -256,28 +279,6 @@ class Fields extends ActiveRecordML
         }
 
         return $list;
-    }
-
-    /**
-     * @return object of \yii\db\ActiveQuery
-     */
-    public function getCreatedBy()
-    {
-        if (class_exists('\wdmg\users\models\Users'))
-            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'created_by']);
-        else
-            return $this->created_by;
-    }
-
-    /**
-     * @return object of \yii\db\ActiveQuery
-     */
-    public function getUpdatedBy()
-    {
-        if (class_exists('\wdmg\users\models\Users'))
-            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'updated_by']);
-        else
-            return $this->updated_by;
     }
 
     /**

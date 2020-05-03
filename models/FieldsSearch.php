@@ -17,7 +17,7 @@ class FieldsSearch extends Fields
     public function rules()
     {
         return [
-            [['id', 'form_id', 'sort_order', 'is_required'], 'integer'],
+            [['form_id', 'sort_order', 'is_required'], 'integer'],
             [['name', 'type', 'status', 'label', 'description', 'params'], 'safe'],
         ];
     }

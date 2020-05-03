@@ -1,7 +1,7 @@
 [![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
 [![Downloads](https://img.shields.io/packagist/dt/wdmg/yii2-forms.svg)](https://packagist.org/packages/wdmg/yii2-forms)
 [![Packagist Version](https://img.shields.io/packagist/v/wdmg/yii2-forms.svg)](https://packagist.org/packages/wdmg/yii2-forms)
-![Progress](https://img.shields.io/badge/progress-in_development-red.svg)
+![Progress](https://img.shields.io/badge/progress-ready_to_use-green.svg)
 [![GitHub license](https://img.shields.io/github/license/wdmg/yii2-forms.svg)](https://github.com/wdmg/yii2-forms/blob/master/LICENSE)
 
 # Yii2 Forms
@@ -94,7 +94,8 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 
-# Status and version [in progress development]
+# Status and version [ready to use]
+* v.1.1.0 - Multi-language support, submit() method for Form component
 * v.1.0.13 - Update dependencies
 * v.1.0.12 - Log activity and translations, added forms component
 * v.1.0.11 - Added pagination, up to date dependencies

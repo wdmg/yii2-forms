@@ -7,7 +7,7 @@ namespace wdmg\forms\components;
  * Yii2 Forms
  *
  * @category        Component
- * @version         1.0.13
+ * @version         1.1.0
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
@@ -39,8 +39,10 @@ class Forms extends Component
     }
 
     /**
-     * @param null $widget
-     * @param null $id
+     * Builds a html-collection of input widgets for the form.
+     *
+     * @param null|object $widget, object of ActiveForm widget
+     * @param null|int|string $id, the form identifier or alias
      * @return string|null
      */
     public function build($widget = null, $id = null)
@@ -73,7 +75,13 @@ class Forms extends Component
                     $formName = $this->getFormName($form->alias);
                     $model->setFormName($formName);
                     $model->defineAttribute($field->attribute);
-                    $model->addRule($field->attribute, $field->getValidator());
+
+                    if ($field->is_required)
+                        $model->addRule($field->attribute, 'required');
+
+                    $validator = $field->getValidator();
+                    $model->addRule($field->attribute, $validator);
+
                     $model->setAttributeLabel([$field->attribute => $field->label]);
 
                     $options = [
@@ -81,13 +89,16 @@ class Forms extends Component
                         'required' => ($field->is_required) ? true : false,
                     ];
 
-                    $input = $widget->field($model, $field->attribute);
-
                     // @TODO: Add form fields validation etc.
                     // @TODO: Add custom options for fields
 
-                    if ($field->type == 2)
+                    $type = $field->getFieldType($field->type);
+                    $input = $widget->field($model, $field->attribute);
+
+                    if ($field->type == 2 || $type == 'textarea')
                         $input->textarea($options);
+                    elseif (!is_null($type))
+                        $input->input($type, $options);
                     else
                         $input->textInput($options);
 
@@ -99,6 +110,16 @@ class Forms extends Component
         return null;
     }
 
+    /**
+     * Processes the form publication data submitted from the controller, validates it and writes it to the database.
+     *
+     * @param string|null $id, the form identifier or alias
+     * @param array|null $data, post data, like ['MyCustomForm' => ['name' => 'John', 'email' => 'john@example.com']]
+     * @return array|bool|null, true - success publish, false - if failure, array - contains list of validation errors
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     * @throws \yii\db\StaleObjectException
+     */
     public function submit($id = null, $data = null) {
 
         if (is_null($id) ||is_null($data))
@@ -119,8 +140,13 @@ class Forms extends Component
             else
                 return null;
 
+            $locale = Yii::$app->sourceLanguage;
+            if (Yii::$app->language)
+                $locale = Yii::$app->language;
+
             $errors = [];
-            if (is_countable($collect) && $fields = $form->getFormsFields(['source_id' => null], true, false)->all()) {
+            if (is_countable($collect) && $fields = $form->getFormsFields(['locale' => $locale], true, false)->all()) {
+            //if (is_countable($collect) && $fields = $form->getFormsFields(['source_id' => null], true, false)->all()) {
 
                 $fields_ids = [];
                 $model = new DynamicModel();
@@ -199,7 +225,13 @@ class Forms extends Component
         return false;
     }
 
-    private function getFormName($formAlias = null) {
+    /**
+     * Returns the name of the form based on an alias
+     *
+     * @param null $formAlias
+     * @return mixed|null
+     */
+    private static function getFormName($formAlias = null) {
 
         if (is_null($formAlias))
             return null;
@@ -207,7 +239,13 @@ class Forms extends Component
         return str_replace(' ', '', \yii\helpers\Inflector::camel2words($formAlias));
     }
 
-    private function getFormAlias($formName = null) {
+    /**
+     * Returns the alias of the form based on an form name
+     *
+     * @param null $formName
+     * @return mixed|null
+     */
+    private static function getFormAlias($formName = null) {
 
         if (is_null($formName))
             return null;
