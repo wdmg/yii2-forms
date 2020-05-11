@@ -82,7 +82,7 @@ class Forms extends Component
                     $validator = $field->getValidator();
                     $model->addRule($field->attribute, $validator);
 
-                    $model->setAttributeLabel([$field->attribute => $field->label]);
+                    $model->setAttributeLabel($field->attribute, $field->label);
 
                     $options = [
                         'placeholder' => ($field->placeholder) ? $field->placeholder : null,
@@ -156,7 +156,7 @@ class Forms extends Component
                     $model->setFormName($formName);
                     $model->defineAttribute($field->attribute);
                     $model->addRule($field->attribute, $field->getValidator());
-                    $model->setAttributeLabel([$field->attribute => $field->label]);
+                    $model->setAttributeLabel($field->attribute, $field->label);
 
                     $field_name = str_replace('-', '_', $field->name);
                     $fields_ids[$field_name] = $field->id;
