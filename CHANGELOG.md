@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.*
+ * setAttributeLabels() fixed
+
 ## 1.1.0 (2020-05-03)
  * Complete views of submitted forms
  * Added submit() method for Form component
