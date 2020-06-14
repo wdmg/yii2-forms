@@ -1,15 +1,21 @@
-[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
+[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.35-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
 [![Downloads](https://img.shields.io/packagist/dt/wdmg/yii2-forms.svg)](https://packagist.org/packages/wdmg/yii2-forms)
 [![Packagist Version](https://img.shields.io/packagist/v/wdmg/yii2-forms.svg)](https://packagist.org/packages/wdmg/yii2-forms)
 ![Progress](https://img.shields.io/badge/progress-ready_to_use-green.svg)
 [![GitHub license](https://img.shields.io/github/license/wdmg/yii2-forms.svg)](https://github.com/wdmg/yii2-forms/blob/master/LICENSE)
 
+<img src="./docs/images/yii2-forms.png" width="100%" alt="Yii2 Composite Forms" />
+
 # Yii2 Forms
-Creation and management of custom user forms
+Module for creating and administering composite forms for Yii2. It also records and manages the results of filling out forms on the site. It has its own component for building and displaying forms in the frontend. Supports multilingual fields and descriptions.
+
+This module is an integral part of the [Butterfly.SMS](https://butterflycms.com/) content management system, but can also be used as an standalone extension.
+
+Copyrights (c) 2019-2020 [W.D.M.Group, Ukraine](https://wdmg.com.ua/)
 
 # Requirements 
 * PHP 5.6 or higher
-* Yii2 v.2.0.33 and newest
+* Yii2 v.2.0.35 and newest
 * [Yii2 Base](https://github.com/wdmg/yii2-base) module (required)
 
 # Installation
@@ -95,6 +101,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 
 
 # Status and version [ready to use]
+* v.1.1.1 - Update README.md and setAttributeLabels() fixed
 * v.1.1.0 - Multi-language support, submit() method for Form component
 * v.1.0.13 - Update dependencies
 * v.1.0.12 - Log activity and translations, added forms component

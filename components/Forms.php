@@ -7,7 +7,7 @@ namespace wdmg\forms\components;
  * Yii2 Forms
  *
  * @category        Component
- * @version         1.1.0
+ * @version         1.1.1
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine

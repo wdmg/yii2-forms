@@ -1,7 +1,8 @@
 Changelog
 =========
 
-## 1.1.*
+## 1.1.1 (2020-06-14)
+ * Update README.md
  * setAttributeLabels() fixed
 
 ## 1.1.0 (2020-05-03)

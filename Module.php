@@ -6,7 +6,7 @@ namespace wdmg\forms;
  * Yii2 Forms
  *
  * @category        Module
- * @version         1.1.0
+ * @version         1.1.1
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
@@ -40,7 +40,7 @@ class Module extends BaseModule
     /**
      * @var string, the description of module
      */
-    public $description = "Creation and management of user forms";
+    public $description = "Creating and manage composite forms";
 
     /**
      * @var array, the list of support locales for multi-language versions of page.
@@ -51,7 +51,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.1.0";
+    private $version = "1.1.1";
 
     /**
      * @var integer, priority of initialization
