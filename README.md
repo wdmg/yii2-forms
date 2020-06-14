@@ -9,7 +9,7 @@
 # Yii2 Forms
 Module for creating and administering composite forms for Yii2. It also records and manages the results of filling out forms on the site. It has its own component for building and displaying forms in the frontend. Supports multilingual fields and descriptions.
 
-This module is an integral part of the [Butterfly.SMS](https://butterflycms.com/) content management system, but can also be used as an standalone extension.
+This module is an integral part of the [Butterfly.СMS](https://butterflycms.com/) content management system, but can also be used as an standalone extension.
 
 Copyrights (c) 2019-2020 [W.D.M.Group, Ukraine](https://wdmg.com.ua/)
 
