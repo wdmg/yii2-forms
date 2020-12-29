@@ -127,6 +127,8 @@ return [
     'The requested field does not exist.' => "Запрошенное поле формы не найдено.",
     'No display language has been set. Source language will be selected: {language}' => "Не задан язык отображения. Будет выбран исходный язык: {language}",
 
+    'Error {code}. Access Denied' => 'Ошибка {code}. Доступ не разрешен',
+    'You are not allowed to view this page.' => 'Вам не разрешено просматривать эту страницу.',
 
 ];
 

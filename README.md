@@ -101,6 +101,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 
 
 # Status and version [ready to use]
+* v.1.1.2 - RBAC implementation
 * v.1.1.1 - Update README.md and setAttributeLabels() fixed
 * v.1.1.0 - Multi-language support, submit() method for Form component
 * v.1.0.13 - Update dependencies

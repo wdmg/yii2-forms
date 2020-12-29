@@ -80,13 +80,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr/>
     <div>
         <?= Html::a(Yii::t('app/modules/forms', '&larr; Back to list'), ['submitted/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
-        <?= Html::a(Yii::t('app/modules/forms', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-delete btn-danger pull-right',
-            'data' => [
-                'confirm' => Yii::t('app/modules/forms', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]); ?>
+        <?php if (Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
+                'created_by' => $model->created_by,
+                'updated_by' => $model->updated_by
+            ])) : ?>
+            <?= Html::a(Yii::t('app/modules/forms', 'Delete'), ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-delete btn-danger pull-right',
+                'data' => [
+                    'confirm' => Yii::t('app/modules/forms', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]); ?>
+        <?php endif; ?>
     </div>
 </div>
 

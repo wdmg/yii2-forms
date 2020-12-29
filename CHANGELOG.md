@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.2 (2020-12-28)
+ * RBAC implementation
+
 ## 1.1.1 (2020-06-14)
  * Update README.md
  * setAttributeLabels() fixed
