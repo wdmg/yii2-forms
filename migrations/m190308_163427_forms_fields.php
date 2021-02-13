@@ -64,8 +64,8 @@ class m190308_163427_forms_fields extends Migration
 
         // If exist module `Users` set foreign key `created_by`, `updated_by` to `users.id`
         if (class_exists('\wdmg\users\models\Users')) {
-            $this->createIndex('{{%idx-forms-fields-created}}','{{%forms_fields}}', ['created_by'],false);
-            $this->createIndex('{{%idx-forms-fields-updated}}','{{%forms_fields}}', ['updated_by'],false);
+            $this->createIndex('{{%idx_forms_fields_created}}','{{%forms_fields}}', ['created_by'],false);
+            $this->createIndex('{{%idx_forms_fields_updated}}','{{%forms_fields}}', ['updated_by'],false);
             $userTable = \wdmg\users\models\Users::tableName();
             $this->addForeignKey(
                 'fk_forms_fields_to_users1',
@@ -102,8 +102,8 @@ class m190308_163427_forms_fields extends Migration
         );
 
         if (class_exists('\wdmg\users\models\Users')) {
-            $this->dropIndex('{{%idx-forms-created}}', '{{%forms_fields}}');
-            $this->dropIndex('{{%idx-forms-updated}}', '{{%forms_fields}}');
+            $this->dropIndex('{{%idx_forms_fields_created}}', '{{%forms_fields}}');
+            $this->dropIndex('{{%idx_forms_fields_updated}}', '{{%forms_fields}}');
             $userTable = \wdmg\users\models\Users::tableName();
             if (!(Yii::$app->db->getTableSchema($userTable, true) === null)) {
                 $this->dropForeignKey(

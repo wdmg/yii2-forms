@@ -52,13 +52,13 @@ use wdmg\widgets\SelectInput;
         ]
     ])->label(Yii::t('app/modules/forms', 'Form')) ?>
 
-    <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'label')->textInput(['maxlength' => true, 'lang' => ($model->locale ?? Yii::$app->language)]) ?>
     <?= $form->field($model, 'name')->textInput([
         'maxlength' => true,
         'readonly' => $readonly
     ]) ?>
-    <?= $form->field($model, 'placeholder')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'placeholder')->textInput(['maxlength' => true, 'lang' => ($model->locale ?? Yii::$app->language)]) ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true, 'lang' => ($model->locale ?? Yii::$app->language)]) ?>
 
     <?= $form->field($model, 'type')->widget(SelectInput::class, [
         'items' => $model->getFieldsTypesList(false),

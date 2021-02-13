@@ -43,7 +43,7 @@ class Module extends BaseModule
     public $description = "Creating and manage composite forms";
 
     /**
-     * @var array, the list of support locales for multi-language versions of page.
+     * @var array, the list of support locales for multi-language versions of form fields.
      * @note This variable will be override if you use the `wdmg\yii2-translations` module.
      */
     public $supportLocales = ['ru-RU', 'uk-UA', 'en-US'];

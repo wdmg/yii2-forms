@@ -42,6 +42,7 @@ class Submits extends \yii\db\ActiveRecord
         return [
             [['form_id', 'access_token'], 'required'],
             [['form_id', 'user_id', 'status'], 'integer'],
+            // @TODO: Add `locale` properties from user language/or selects
             [['created_at', 'updated_at'], 'safe'],
             [['access_token'], 'string', 'max' => 32],
             [['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => Forms::class, 'targetAttribute' => ['form_id' => 'id']],
@@ -57,6 +58,7 @@ class Submits extends \yii\db\ActiveRecord
             'id' => Yii::t('app/modules/forms', 'ID'),
             'form' => Yii::t('app/modules/forms', 'Form'),
             'form_id' => Yii::t('app/modules/forms', 'Form ID'),
+            // @TODO: Add `locale` properties from user language/or selects
             'user' => Yii::t('app/modules/forms', 'User'),
             'user_id' => Yii::t('app/modules/forms', 'User ID'),
             'access_token' => Yii::t('app/modules/forms', 'Access token'),

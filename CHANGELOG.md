@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.*
+ * Lang attribute for HTML tags and inputs
+ 
 ## 1.1.2 (2020-12-28)
  * RBAC implementation
 

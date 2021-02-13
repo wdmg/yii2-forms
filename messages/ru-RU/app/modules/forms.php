@@ -28,6 +28,12 @@ return [
     'Save' => 'Сохранить',
     'Delete' => 'Удалить',
     'Create new form' => 'Создать форму',
+
+    'All types' => "Все типы",
+
+    'All variants' => "Все варианты",
+    'Required' => "Обязательное",
+    'Not required' => "Не обязательное",
     '- is required' => '- обязательное поле',
 
     '&larr; Back to list' => '&larr; Назад к списку',

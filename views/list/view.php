@@ -28,13 +28,26 @@ if ($model->locale && isset(Yii::$app->translations) && class_exists('\wdmg\tran
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
+            [
+                'attribute' => 'name',
+                'format' => 'ntext',
+                'contentOptions' => [
+                    'lang' => ($model->locale ?? Yii::$app->language)
+                ]
+            ],
             'alias',
-            'title',
+            [
+                'attribute' => 'title',
+                'format' => 'ntext',
+                'contentOptions' => [
+                    'lang' => ($model->locale ?? Yii::$app->language)
+                ]
+            ],
             [
                 'attribute' => 'description',
                 'format' => 'html',
                 'contentOptions' => [
+                    'lang' => ($model->locale ?? Yii::$app->language),
                     'style' => 'display:inline-block;max-height:360px;overflow-x:auto;'
                 ]
             ],
@@ -79,7 +92,6 @@ if ($model->locale && isset(Yii::$app->translations) && class_exists('\wdmg\tran
                         return $data->status;
                 }
             ],
-
             [
                 'attribute' => 'created',
                 'label' => Yii::t('app/modules/forms','Created'),

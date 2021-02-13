@@ -89,13 +89,12 @@ class Fields extends ActiveRecordML
     public function rules()
     {
         $rules = [
-            [['form_id', 'label', 'type'], 'required'],
-            [['form_id', 'type', 'sort_order'], 'integer'],
+            [['form_id', 'label', 'type', 'status'], 'required'],
+            [['form_id', 'type', 'sort_order', 'status'], 'integer'],
             [['params'], 'string'],
             [['label', 'name'], 'string', 'max' => 64],
             ['name', 'match', 'pattern' => '/^[A-za-z]/', 'message' => Yii::t('app/modules/forms','The attribute must begin with a letter.')],
             ['name', 'match', 'pattern' => '/^[A-Za-z0-9\_]+$/', 'message' => Yii::t('app/modules/forms','It allowed only Latin alphabet, numbers and «_» character.')],
-            [['status', 'is_required'], 'boolean'],
             [['placeholder'], 'string', 'max' => 124],
             [['description'], 'string', 'max' => 255],
             [['form_id'], 'exist', 'skipOnError' => false, 'targetClass' => Forms::class, 'targetAttribute' => ['form_id' => 'id']],
@@ -279,6 +278,24 @@ class Fields extends ActiveRecordML
         }
 
         return $list;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIsRequiredList($allVariants = false)
+    {
+        $list = [];
+        if ($allVariants) {
+            $list = [
+                '*' => Yii::t('app/modules/forms', 'All variants')
+            ];
+        }
+
+        return ArrayHelper::merge($list, [
+            0 => Yii::t('app/modules/forms', 'Required'),
+            1 => Yii::t('app/modules/forms', 'Not required'),
+        ]);
     }
 
     /**

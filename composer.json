@@ -34,7 +34,12 @@
   },
   "extra": {
     "options": {
-      "routePrefix": "admin"
+      "routePrefix": "admin",
+      "supportLocales": [
+        "ru-RU",
+        "uk-UA",
+        "en-US"
+      ]
     }
   }
 }

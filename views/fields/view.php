@@ -41,9 +41,28 @@ if ($model->locale && isset(Yii::$app->translations) && class_exists('\wdmg\tran
                     return $output;
                 }
             ],
-            'label',
+            [
+                'attribute' => 'label',
+                'format' => 'ntext',
+                'contentOptions' => [
+                    'lang' => ($model->locale ?? Yii::$app->language)
+                ]
+            ],
             'name',
-            'description:ntext',
+            [
+                'attribute' => 'placeholder',
+                'format' => 'ntext',
+                'contentOptions' => [
+                    'lang' => ($model->locale ?? Yii::$app->language)
+                ]
+            ],
+            [
+                'attribute' => 'description',
+                'format' => 'ntext',
+                'contentOptions' => [
+                    'lang' => ($model->locale ?? Yii::$app->language)
+                ]
+            ],
             [
                 'attribute' => 'type',
                 'value' => function($data) {

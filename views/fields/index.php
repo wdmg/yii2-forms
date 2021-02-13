@@ -102,6 +102,14 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
             [
                 'attribute' => 'is_required',
                 'format' => 'html',
+                'filter' => SelectInput::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'is_required',
+                    'items' => $searchModel->getIsRequiredList(true),
+                    'options' => [
+                        'class' => 'form-control'
+                    ]
+                ]),
                 'headerOptions' => [
                     'class' => 'text-center'
                 ],
