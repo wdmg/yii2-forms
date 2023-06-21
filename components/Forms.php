@@ -7,10 +7,9 @@ namespace wdmg\forms\components;
  * Yii2 Forms
  *
  * @category        Component
- * @version         1.1.2
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-forms
- * @copyright       Copyright (c) 2019 - 2021 W.D.M.Group, Ukraine
+ * @copyright       Copyright (c) 2019 - 2023 W.D.M.Group, Ukraine
  * @license         https://opensource.org/licenses/MIT Massachusetts Institute of Technology (MIT) License
  *
  */
@@ -145,8 +144,8 @@ class Forms extends Component
                 $locale = Yii::$app->language;
 
             $errors = [];
-            if (is_countable($collect) && $fields = $form->getFormsFields(['locale' => $locale], true, false)->all()) {
-            //if (is_countable($collect) && $fields = $form->getFormsFields(['source_id' => null], true, false)->all()) {
+            if (is_array($collect) && $fields = $form->getFormsFields(['locale' => $locale], true, false)->all()) {
+            //if (is_array($collect) && $fields = $form->getFormsFields(['source_id' => null], true, false)->all()) {
 
                 $fields_ids = [];
                 $model = new DynamicModel();
@@ -170,7 +169,7 @@ class Forms extends Component
                     $attributes = $model->getAttributes();
 
 
-                    if (is_countable($attributes)) {
+                    if (is_array($attributes)) {
 
                         $hasError = false;
 
