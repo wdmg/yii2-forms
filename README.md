@@ -101,13 +101,6 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 
 
 # Status and version [ready to use]
+* v.1.2.0 - Update copyrights, fix menu dashboard
 * v.1.1.2 - RBAC implementation
 * v.1.1.1 - Update README.md and setAttributeLabels() fixed
-* v.1.1.0 - Multi-language support, submit() method for Form component
-* v.1.0.13 - Update dependencies
-* v.1.0.12 - Log activity and translations, added forms component
-* v.1.0.11 - Added pagination, up to date dependencies
-* v.1.0.10 - Rebuild migrations, views
-* v.1.0.9 - Fixed deprecated class declaration
-* v.1.0.8 - Added extra options to composer.json and navbar menu icon
-* v.1.0.7 - Added choice param for non interactive mode

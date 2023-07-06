@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/forms', 'Submitted forms');
                 'value' => function($data) {
                     $count = 0;
                     $output = '';
-                    if (is_countable($data->contents)) {
+                    if (is_array($data->contents)) {
                         foreach ($data->contents as $content) {
 
                             if ($count >= 6) {
